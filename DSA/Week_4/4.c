@@ -15,16 +15,21 @@ int main(){
 		scanf(" %d",&time[i][1]);
 	}
 	merge_sort(0,n-1,time);
+	for(int i=0;i<n;i++){
+		printf("low:%d high:%d\n",time[i][0],time[i][1]);
+	}
+	printf("\n");
 	int max=0;
 	int opt_time=-1;
 	for(int i=0;i<n;i++){
 		int i_max=0;
 		int t_self=time[i][0];
 		for(int j=0;j<=i;j++){
-			if(time[j][i]>t_self){
+			if(time[j][1]>=t_self){
 				i_max+=1;
 			}
 		}
+		printf("max:%d i_max:%d t_self:%d\n",max,i_max,t_self);
 		if(i_max>max){
 			opt_time=t_self;
 			max=i_max;

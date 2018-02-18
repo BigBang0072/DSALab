@@ -37,6 +37,7 @@ void reverse(int idx,int arr[]){
 		arr[idx-i]=temp;
 	}
 }
+
 void print_arr(int n,int arr[]){
 	printf("new iter: ");
 	for(int i=0;i<n;i++){

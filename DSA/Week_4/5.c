@@ -62,7 +62,7 @@ void stable_sort(int n,int max,int arr[][2]){
 	int temp_arr[n][2];
 	for(int i=n-1;i>=0;i--){//opp:this is necessary for forer comes former in case of same val
 		int fact=arr[i][1];
-		int prev=count[max-fact]-1;
+		int prev=count[max-fact]-1;//converting to zero based indexing
 		//printf("fact:%d pos:%d\n",fact,prev);
 		temp_arr[prev][0]=arr[i][0];
 		temp_arr[prev][1]=arr[i][1];

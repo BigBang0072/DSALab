@@ -84,7 +84,7 @@ void merge_sort(int low,int high,int arr[]){
 void binary_search(int *found,int num,int id,int low,int high,int arr[]){
 	//id is self id so that we dont find ourselves
 	if(high==low){
-		if(arr[low]==num){
+		if(arr[low]==num && low!=id){
 			*found=1;
 		}
 		return;
