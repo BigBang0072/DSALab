@@ -50,6 +50,7 @@ int main(){
 	}
 
 	printf("N: %lld\n",lo);
+	evaluation_function(m,m,13,nCr);
 
 	return 0;
 }
@@ -99,6 +100,7 @@ int evaluation_function(lli n,lli m,int k,lli nCr[][65]){
 	//calculating number of digits with k 1s
 	lli before=0;
 	if(k==n_k){
+		printf("ABHINAV\n");
 		before++;
 	}
 	int count=0;
