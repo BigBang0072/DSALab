@@ -35,21 +35,21 @@ int main(){
 
 	//evaluation_function(m,m,k,nCr);
 	//finally
-	lli lo=m,hi=1000000000000000000;
-	lli mid;
-	while(lo<hi){
-		mid=(lo+hi)/2;
-		int flag=evaluation_function(mid,m,k,nCr);
-		printf("n:%lld flag:%d\n",mid,flag);
-		if(flag==1){
-			hi=mid;
-		}
-		else{
-			lo=mid+1;
-		}
-	}
+	// lli lo=m,hi=1000000000000000000;
+	// lli mid;
+	// while(lo<hi){
+	// 	mid=(lo+hi)/2;
+	// 	int flag=evaluation_function(mid,m,k,nCr);
+	// 	printf("n:%lld flag:%d\n",mid,flag);
+	// 	if(flag==1){
+	// 		hi=mid;
+	// 	}
+	// 	else{
+	// 		lo=mid+1;
+	// 	}
+	// }
 
-	printf("N: %lld\n",lo);
+	// printf("N: %lld\n",lo);
 	evaluation_function(m,m,13,nCr);
 
 	return 0;
