@@ -85,7 +85,7 @@ struct node * push_stack(int x,int y,struct node *tos){
 }
 struct node * pop_stack(struct node *tos){
 	struct node *temp=tos->back;
-	//free(tos);
+	free(tos);
 	return temp;
 }
 
