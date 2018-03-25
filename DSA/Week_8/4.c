@@ -11,7 +11,7 @@ struct node{
 };
 void add_node(int pid,int cid,int val,struct node *graph[]);
 void print_graph(int M,struct node *graph[]);
-
+int detect_negetive_cycle(int cost,int pid,int visited[][2],struct node *graph[]);
 
 int main(){
 	int M;
@@ -21,8 +21,8 @@ int main(){
 		for(int j=0;j<M;j++){
 			scanf(" %d",&adj[i][j]);
 		}
+		adj[i][i]=0;	//removing the self-loop on any possible start
 	}
-
 	//making the "adj-list" graph O(m^3)
 	printf("Building Graph\n");
 	struct node *graph[M];
@@ -38,13 +38,17 @@ int main(){
 	print_graph(M,graph);
 
 	//Finding the cycle with negetive gradient loop
-	for(int i=0;i<M;i++){
-		int visited[M];
+	int flag=0;
+	for(int i=0;i<M && flag==0;i++){//O(M^3)
+		int visited[M][2],cost=0;
 		for(int j=0;j<M;j++){
-			visited[j]=0;
+			visited[j][0]=0;	//for checking if visited
+			visited[j][1]=0;	//to keep track of cost last time it was visited
 		}
-		visited[i]=1;
+		flag=detect_negetive_cycle(cost,i,visited,graph);
+		printf("InfLoop Possibility: %d %d\n",i,flag);
 	}
+	printf("InfLoop Possibility: %d\n",flag);
 
 	return 0;
 }
@@ -75,11 +79,34 @@ void print_graph(int M,struct node *graph[]){
 	}
 }
 
-int detect_negetive_cycle(int cost,int pid,int visited[],struct node *graph[]){
+//at max O(m^2) if every city is connected to every other
+int detect_negetive_cycle(int cost,int pid,int visited[][2],struct node *graph[]){
 	//the cost is cost incurred till now
-	struct node *head=graph[pid];
-	if(visited[pid]==1){
-		
+	printf("print: %d %d %d\n",pid,cost,visited[pid][1]);
+	//Handling the base case
+	if(visited[pid][0]==1){
+		//checking if there is negetive gradient
+		if(cost<visited[pid][1]){
+			return 1;
+		}
+		return 0;
 	}
+	else if(graph[pid]==NULL){//end of graph
+		return 0;
+	}
+
+	struct node *head=graph[pid];
+	visited[pid][0]=1;
+	visited[pid][1]=cost;
+	while(head!=NULL){
+		int tcost=cost+head->val;
+		int flag=detect_negetive_cycle(tcost,head->cid,visited,graph);
+		head=head->next;
+		if(flag==1){
+			return 1;
+		}
+	}
+	visited[pid][0]=0;
+	return 0;
 }
 
