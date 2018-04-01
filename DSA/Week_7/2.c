@@ -6,6 +6,9 @@ void print_heap(int len,int arr[][2]);
 void insert_minheap(int val,int actid,int len,int arr[][2]);
 int delete_heapify(int len,int arr[][2]);
 
+//first sort the time array for correct answer in hacker rank
+//also question requires long long int for time
+
 int main(){
 	int N;
 	scanf("%d",&N);
@@ -27,7 +30,7 @@ int main(){
 			print_heap(len,heap);
 			printf("global_time: %d\n\n",global_time);
 		}
-		else{
+		else if(len!=-1){
 			int idx=delete_heapify(len,heap);
 			len--;
 			global_time+=arr[idx][1];
@@ -35,6 +38,10 @@ int main(){
 			i--;
 			print_heap(len,heap);
 			printf("global_time: %d\n\n",global_time);
+		}
+		else{
+			global_time=arr[i][0];
+			i--;
 		}
 	}
 	while(len!=-1){
@@ -45,7 +52,7 @@ int main(){
 		print_heap(len,heap);
 		printf("global_time: %d\n\n",global_time);
 	}
-	printf("AVG TIME: %d\n",wait_time/N);
+	printf("%d\n",wait_time/N);
 	return 0;
 }
 

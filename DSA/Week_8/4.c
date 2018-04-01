@@ -39,12 +39,18 @@ int main(){
 
 	//Finding the cycle with negetive gradient loop
 	int flag=0;
+	int visited[M][2];
+	for(int j=0;j<M;j++){
+		visited[j][0]=0;	//for checking if visited
+		visited[j][1]=0;	//to keep track of cost last time it was visited
+	}
 	for(int i=0;i<M && flag==0;i++){//O(M^3)
-		int visited[M][2],cost=0;
-		for(int j=0;j<M;j++){
-			visited[j][0]=0;	//for checking if visited
-			visited[j][1]=0;	//to keep track of cost last time it was visited
-		}
+		//int visited[M][2];
+		int cost=0;
+		// for(int j=0;j<M;j++){
+		// 	visited[j][0]=0;	//for checking if visited
+		// 	visited[j][1]=0;	//to keep track of cost last time it was visited
+		// }
 		flag=detect_negetive_cycle(cost,i,visited,graph);
 		printf("InfLoop Possibility: %d %d\n",i,flag);
 	}
@@ -53,6 +59,8 @@ int main(){
 	return 0;
 }
 
+//could be reduced to O(1) just add at the begining. 
+//like in new version of hash function we used in week9
 void add_node(int pid,int cid,int val,struct node *graph[]){
 	struct node *temp=(struct node *)malloc(sizeof(struct node));
 	temp->cid=cid;
@@ -106,7 +114,9 @@ int detect_negetive_cycle(int cost,int pid,int visited[][2],struct node *graph[]
 			return 1;
 		}
 	}
-	visited[pid][0]=0;
+	//visited[pid][0]=0; //now as this is already travelled and 
+	//given sign if negetive cycle is there or not then not need
+	//to travel this again so keep it flagged non zero
 	return 0;
 }
 

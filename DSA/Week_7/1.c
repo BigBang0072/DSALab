@@ -11,7 +11,8 @@ int main(){
 	scanf("%d",&N);
 	int arr[N];
 	for(int i=0;i<N;i++){
-		scanf(" %d",&arr[i]);
+		//scanf(" %d",&arr[i]);
+		arr[i]=i;
 	}
 
 	//Filling the heap the we have around the mid and mid+1 
@@ -23,13 +24,13 @@ int main(){
 		if(len1-len2==0){
 			insert_heap(1,len1,val,arr1);
 			len1++;
-			print_heap(len1,arr1);
-			print_heap(len2,arr2);
+			//print_heap(len1,arr1);
+			//print_heap(len2,arr2);
 			float temp=val;
 			if(len2!=-1 && arr2[0]<val){
-				temp=arr2[0];
+				temp=arr2[0];				
 			}
-			printf("Median: %f\n\n",temp);
+			printf("%f\n",temp);
 		}
 		else if(len1-len2==1){
 			insert_heap(1,len1,val,arr1);
@@ -38,9 +39,19 @@ int main(){
 			len1--;
 			insert_heap(2,len2,temp,arr2);
 			len2++;
-			print_heap(len1,arr1);
-			print_heap(len2,arr2);
-			printf("Median: %f\n\n",(float)(arr1[0]+arr2[0])/2);
+			//print_heap(len1,arr1);
+			//print_heap(len2,arr2);
+			if(arr1[0]>arr2[0]){
+				int k=delete_heapify(1,len1,arr1);
+				len1--;
+				int kk=delete_heapify(1,len2,arr2);
+				len2--;
+				insert_heap(1,len1,kk,arr1);
+				len1++;
+				insert_heap(2,len2,k,arr2);
+				len2++;
+			}
+			printf("%f\n",(float)(arr1[0]+arr2[0])/2);
 		}
 	}
 	return 0;
